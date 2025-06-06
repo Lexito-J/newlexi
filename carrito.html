@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAJAVASA</title>
+    <link rel="stylesheet" href="styles.css">
+   <link rel="stylesheet" href="stylesmenu.css">
+</head>
+<body>
+
+    <!-- Encabezado -->
+      <header class="header-bar">
+        <div class="header-container">
+            <h1 class="title">FERRETERIA MAJAVASA</h1>
+            <div class="navigation">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="quienesSomos.html">Quiénes Somos</a></li>
+                        <li><a href="catalogo.html">Productos</a></li>
+                        <li><a href="contactenos.html">Contáctenos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+  
+
+  <a href="catalogo.html" class="regresar"><h1 class="regresar-catalogo"> Volver a productos</h1></a>
+
+  <table id="cart-table">
+    <thead class="table-thead">
+      <tr>
+        <th>N°</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Subtotal</th>
+        <th>Acción</th>
+        
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <p id="total"></p>
+
+  <button onclick="clearCart()">🗑️ Vaciar carrito</button>
+  <button onclick="downloadPDF()">✉️ Download PDF</button>
+
+  <script>
+
+
+/*new scrip jsonpdf*/
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+
+  const doc = new jsPDF();
+  const date = new Date().toLocaleDateString();
+
+  // Encabezado estilo SUNAT
+  doc.setFontSize(12);
+  doc.setFont(undefined, 'bold');
+  doc.text("FERRETERIA MAJAVASA", 14, 15);
+  doc.setFontSize(10);
+  doc.setFont(undefined, 'normal');
+  doc.text("RUC: 12345678901", 14, 22);
+  doc.text("Dirección: Calle naranjales 123, Ciudad, Mazamari", 14, 28);
+  doc.text(`Fecha: ${date}`, 150, 22);
+
+  // Título
+  doc.setFont(undefined, 'bold');
+  doc.setFontSize(11);
+  doc.text("DETALLE DE COMPRA", 105, 40, { align: "center" });
+
+  // Tabla de productos
+  const grouped = {};
+  cart.forEach(product => {
+    if (!grouped[product.id]) {
+      grouped[product.id] = { ...product, quantity: 1 };
+    } else {
+      grouped[product.id].quantity++;
+    }
+  });
+  const items = Object.values(grouped);
+
+  const rows = items.map((item, index) => [
+    index + 1,
+    item.name,
+    item.quantity,
+    `$${item.price.toFixed(2)}`,
+    `$${(item.quantity * item.price).toFixed(2)}`
+  ]);
+
+  let total = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+
+  doc.autoTable({
+    startY: 50,
+    head: [["N°", "Producto", "Cantidad", "Precio", "Subtotal"]],
+    body: rows,
+    theme: 'grid',
+    styles: { fontSize: 9 },
+    headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+    foot: [["", "", "", "Total:", `$${total.toFixed(2)}`]],
+    footStyles: { fillColor: [41, 128, 185], textColor: 255 }
+  });
+
+  doc.save("detalle_compra.pdf");
+}
+
+
+
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const tableBody = document.querySelector("#cart-table tbody");
+const totalDisplay = document.getElementById("total");
+
+function renderCart() {
+  tableBody.innerHTML = "";
+  let total = 0;
+
+  const grouped = {};
+
+  cart.forEach(product => {
+    if (!grouped[product.id]) {
+      grouped[product.id] = { ...product, quantity: 1 };
+    } else {
+      grouped[product.id].quantity++;
+    }
+  });
+
+  const items = Object.values(grouped);
+  items.forEach((item, index) => {
+    const subtotal = item.quantity * item.price;
+    total += subtotal;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>
+        <img src="${item.imagen}" alt="${item.name}" style="width:50px;height:50px;object-fit:contain;">
+        <br>${item.name}
+      </td>
+      <td>${item.quantity}</td>
+      <td>$${item.price}</td>
+      <td>$${subtotal}</td>
+      <td><button onclick="removeItem(${item.id})">BORRAR</button></td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  totalDisplay.textContent = `Total: $${total}`;
+}
+
+function removeItem(productId) {
+  // Elimina solo uno de ese producto
+  const idx = cart.findIndex(item => item.id === productId);
+  if (idx !== -1) {
+    cart.splice(idx, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+  }
+}
+
+function clearCart() {
+  if (confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
+    localStorage.removeItem("cart");
+    cart = [];
+    renderCart();
+  }
+}
+
+renderCart();
+
+
+
+ /*new script*/
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Enlace copiado al portapapeles');
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function agregarAlCarrito(nombre, precio) {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.push({ nombre, precio });
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            window.location.href = 'carrito.html';
+        }
+</script>
+
+ <footer>
+  <div class="footer-content">
+    <div class="footer-section about">
+      <h3>Sobre Nosotros</h3>
+      <p>Ferretería Online es tu aliado confiable para todas tus necesidades en herramientas, materiales y equipos para el hogar y la industria.</p>
+    </div>
+    <div class="footer-section links">
+      <h3>Enlaces Rápidos</h3>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Productos</a></li>
+        <li><a href="quienesSomos.html">¿Quiénes Somos?</a></li>
+        <li><a href="contactenos.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contacto">
+      <h3>Contáctanos</h3>
+      <p>Email: info@ferreteriaonline.com</p>
+      <p>Tel: +34 900 123 456</p>
+      <p>Dirección: Calle Herramientas 123, Ciudad, País</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> Ferretería Online. Todos los derechos reservados.</p>
+  </div>
+
+
+   
+
+
+
+
+  
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctenos - Ferretería Majavasa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesmenu.css">
+</head>
+<body>
+    <header class="header-bar">
+        <div class="header-container">
+            <h1 class="title">FERRETERIA MAJAVASA</h1>
+            <div class="navigation">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="quienesSomos.html">Quiénes Somos</a></li>
+                        <li><a href="catalogo.html">Productos</a></li>
+                        <li><a href="contactenos.html">Contáctenos</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        
+        <a href="carrito.html"><h1 class="carrito-h1">🛒Carrito <span id="numerito" class="numerito">2</span></h1></a>
+        
+        <div id="product-list" class="product-list"></div>
+    </main>
+          <footer>
+  <div class="footer-content">
+    <div class="footer-section about">
+      <h3>Sobre Nosotros</h3>
+      <p>Ferretería Online es tu aliado confiable para todas tus necesidades en herramientas, materiales y equipos para el hogar y la industria.</p>
+    </div>
+    <div class="footer-section links">
+      <h3>Enlaces Rápidos</h3>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Productos</a></li>
+        <li><a href="quienesSomos.html">¿Quiénes Somos?</a></li>
+        <li><a href="contactenos.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-section contacto">
+      <h3>Contáctanos</h3>
+      <p>Email: info@ferreteriaonline.com</p>
+      <p>Tel: +34 900 123 456</p>
+      <p>Dirección: Calle Herramientas 123, Ciudad, País</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> Ferretería Online. Todos los derechos reservados.</p>
+  </div>
+
+ 
+
+
+
+</footer>
+
+    <script>
+  // Ahora cada producto tiene un ID único
+  const productos = [
+    {
+      id: 1,
+      nombre: "alicate bahco",
+      precio: 35,
+      imagen: "img/alicate bahco.jpg"
+    },
+    {
+      id: 2,
+      nombre: "alicate de corte",
+      precio: 80,
+      imagen: "img/alicate de corte.webp"
+    },
+    {
+      id: 3,
+      nombre: "alicate de presion",
+      precio: 42,
+      imagen: "img/alicate de presion.jpeg"
+    },
+     {
+      id: 4,
+      nombre: "alicate de punta",
+      precio: 25,
+      imagen: "img/alicate de punta.jpg"
+    },
+    {
+      id: 5,
+      nombre: "alicate de electricista",
+      precio: 42,
+      imagen: "img/alicate para electricista.jpg"
+    },
+    {
+      id: 6,
+      nombre: "alicate punta curva",
+      precio: 45,
+      imagen: "img/alicate punta curva.webp"
+    },
+    {
+      id: 7,
+      nombre: "alicate universal",
+      precio: 30,
+      imagen: "img/alicate universal.webp"
+    },
+    {
+      id: 8,
+      nombre: "amoladora bosch",
+      precio: 150,
+      imagen: "img/amoladora bosxh.webp"
+    },
+    {
+      id: 9,
+      nombre: "amoladora total",
+      precio: 100,
+      imagen: "img/amoladora tota.webp"
+    },
+    {
+      id: 10,
+      nombre: "amoladora trupper",
+      precio: 120,
+      imagen: "img/amoladora trupper.jpg"
+    },
+    {
+      id: 11,
+      nombre: "bomba de agua",
+      precio: 380,
+      imagen: "img/bomba de agua.jpg"
+    },
+    {
+      id: 12,
+      nombre: "cortadora",
+      precio: 185,
+      imagen: "img/cortadora.jpg"
+    },
+    {
+      id: 13,
+      nombre: "cuchillo loxli",
+      precio: 75,
+      imagen: "img/cuchillo.jpg"
+    },
+    {
+      id: 14,
+      nombre: "destornillador estrella",
+      precio: 18,
+      imagen: "img/destornillador estrella.jpg"
+    },
+    {
+      id: 15,
+      nombre: "destornillador plano",
+      precio: 18,
+      imagen: "img/detornillador.jpg"
+    },
+    {
+      id: 16,
+      nombre: "disco abrasivo",
+      precio: 28,
+      imagen: "img/disco abrasivo.jpg"
+    },
+    {
+      id: 17,
+      nombre: "disco de corte",
+      precio: 25,
+      imagen: "img/disco de corte.jpg"
+    },
+    {
+      id: 18,
+      nombre: "disco de sierra",
+      precio: 33,
+      imagen: "img/disco de sierra.jpg"
+    },
+    {
+      id: 19,
+      nombre: "disco diamantado",
+      precio: 35,
+      imagen: "img/disco diamantado.jpg"
+    },
+    {
+      id: 20,
+      nombre: "disco makita",
+      precio: 20,
+      imagen: "img/disco makita.jpg"
+    },
+    {
+      id: 21,
+      nombre: "lima",
+      precio: 25,
+      imagen: "img/lima pack.jpg"
+    },
+    {
+      id: 22,
+      nombre: "machete 22",
+      precio: 18,
+      imagen: "img/machete 22 °.webp"
+    },
+    {
+      id: 23,
+      nombre: "martillo",
+      precio: 22,
+      imagen: "img/martillo.jpg"
+    },
+    {
+      id: 24,
+      nombre: "taladro percutor",
+      precio: 380,
+      imagen: "img/percutor.webp"
+    },
+    {
+      id: 25,
+      nombre: "taladro percutor",
+      precio: 450,
+      imagen: "img/percutorr.jpg"
+    },
+    {
+      id: 26,
+      nombre: "alicate de pinza",
+      precio: 80,
+      imagen: "img/pinza alicate.jpg"
+    },
+    {
+      id: 27,
+      nombre: "amoladora trupper",
+      precio: 120,
+      imagen: "img/amoladora trupper.jpg"
+    },
+    {
+      id: 28,
+      nombre: "bomba de agua",
+      precio: 380,
+      imagen: "img/bomba de agua.jpg"
+    },
+   
+  ];
+
+  const productList = document.getElementById('product-list');
+  productList.innerHTML = productos.map((producto) => `
+    <div class="producto">
+      <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-img">
+      <h2 class="producto-nombre">${producto.nombre}</h2>
+      <p class="producto-precio">$${producto.precio}</p>
+      <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
+    </div>
+  `).join('');
+
+  // Función para actualizar el numerito del carrito
+  function actualizarNumerito() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // Sumar todas las cantidades de productos en el carrito
+    const total = cart.reduce((acc, item) => acc + (item.cantidad || 1), 0);
+    document.getElementById('numerito').textContent = total;
+  }
+
+  // Asignar evento a cada botón de agregar al carrito
+  document.querySelectorAll('.agregar-carrito').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const id = parseInt(this.getAttribute('data-id'));
+      const producto = productos.find(p => p.id === id);
+      // Por defecto, agregar 1 unidad
+      let cantidad = 1;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({
+        id: producto.id,
+        name: producto.nombre,
+        price: producto.precio,
+        imagen: producto.imagen,
+        cantidad: cantidad
+      });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      actualizarNumerito();
+      
+    });
+  });
+
+  // Actualizar numerito al cargar la página
+  actualizarNumerito();
+</script>
+
+
+
+    <style>
+    /* Estilos básicos para el catálogo */
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        margin: 40px 0;
+    }
+    .producto {
+        background: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        padding: 20px;
+        width: 220px;
+        text-align: center;
+        transition: box-shadow 0.2s;
+    }
+    .producto:hover {
+        box-shadow: 0 4px 16px rgba(4, 23, 185, 0.685);
+    }
+    .producto-img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+    .producto-nombre {
+        font-size: 1.2em;
+        margin: 10px 0 5px 0;
+        color: #003d92;
+    }
+    .producto-precio {
+        font-size: 1.1em;
+        color: #222;
+        margin-bottom: 15px;
+    }
+    .agregar-carrito {
+        background: #003d92;
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.2s;
+    }
+    .agregar-carrito:hover {
+        background: #0050c8;
+    }
+    </style>
+</body>
+</html>
